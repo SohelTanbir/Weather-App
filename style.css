@@ -13,7 +13,6 @@ body{
     background-size: cover;
     height: 100vh;
     background-position:center;
-    background-attachment: fixed;
 }
 .app-container {
     max-width: 600px;
@@ -100,6 +99,7 @@ h1{
     .input-place button {
         right: 0%;
     }
+
     #place-name {
         font-size: 35px;
     }
