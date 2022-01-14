@@ -16,21 +16,70 @@
     <div class="app-container">
         <h2>Today's Weather</h2>
         <div class="input-place">
-            <input type="text" placeholder="Enter your location / City Name">
-            <button> <i class="fas fa-search"></i></button>
+            <input id="inputCity" type="text" name="city" placeholder="Enter your location / City Name">
+            <button onclick="inputHandle()"> <i class="fas fa-search"></i></button>
         </div>
         <div class="display-data">
                 <div class="tempareture">
                     <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
                     <h3 id="place-name">Thakurgaon</h3>
-                    <h1>26&deg;<span>C</span></h1>
-                    <h4>overcast clouds</h4>
+                    <h1 id="temp">20&deg;<span>C</span></h1>
+                    <h4 id="sky">clouds</h4>
                 </div>
         </div>
     </div>
 
 
 
+<script>
+    // get city name from user input
+    function inputHandle(){
+        const cityName = document.getElementById("inputCity").value;
+        if(cityName){
+            loadDate(cityName)
+        }else{
+            alert("Please Enter a City name!")
+        }
+    }
+   
+   // load dat from api
+   function loadDate(city){
+     // fetch api data 
+    const url = `http://api.openweathermap.org/data/2.5/find?q=${city}&units=metric&appid=1f8c8bdcea67507dd940eaab002da51a`
+    fetch(url)
+    .then( res => res.json())
+    .then(data =>{
+        display(data.list[0])
+    })
+   }
 
+   // display data
+   function display(data){
+    console.log(data)
+    if(data){
+        const cityName = data.name;
+        const temperature = data.main.temp_max;
+        const sky = data.weather[0].description;
+        const icon = data.weather[0].icon;
+        
+        document.getElementById("place-name").innerText = cityName;
+        document.getElementById("temp").innerHTML = `${temperature}&deg;<span>C</span>`;
+        document.getElementById("sky").innerText = sky;
+
+
+
+    }else{
+        alert("sorry! Invalid city name!")
+    }
+
+
+   }
+
+
+
+
+
+
+</script>
 </body>
 </html>
