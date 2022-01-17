@@ -1,86 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
+    <title>Weather App || Sohel Rana</title>
     <!--google fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <!--main css-->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
     <div class="app-container">
-        <h2>Today's Weather</h2>
         <div class="input-place">
+            <h2>Today's Weather</h2>
             <input id="inputCity" type="text" name="city" placeholder="Enter your location / City Name">
             <button onclick="inputHandle()"> <i class="fas fa-search"></i></button>
         </div>
         <div class="display-data">
-                <div class="tempareture">
-                    <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
-                    <h3 id="place-name">Thakurgaon</h3>
-                    <h1 id="temp">20&deg;<span>C</span></h1>
-                    <h4 id="sky">clouds</h4>
-                </div>
+            <div class="tempareture">
+                <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
+                <h3><span id="place-name"></span><sub id="country">BD</sub></h3>
+                <h1 id="temp">20&deg;<span>C</span></h1>
+                <h4 id="sky">clouds</h4>
+            </div>
         </div>
     </div>
-
-
-
-<script>
-    // get city name from user input
-    function inputHandle(){
-        const cityName = document.getElementById("inputCity").value;
-        if(cityName){
-            loadDate(cityName)
-        }else{
-            alert("Please Enter a City name!")
+    <p class="dev-info">2022&copy;Develop By <span>Sohel Rana</span></p>
+    <script>
+        // get city name from user input
+        function inputHandle() {
+            const cityName = document.getElementById("inputCity").value;
+            if (cityName) {
+                loadDate(cityName)
+            } else {
+                alert("Please Enter a City name!");
+            }
         }
-    }
-   
-   // load dat from api
-   function loadDate(city){
-     // fetch api data 
-    const url = `http://api.openweathermap.org/data/2.5/find?q=${city}&units=metric&appid=1f8c8bdcea67507dd940eaab002da51a`
-    fetch(url)
-    .then( res => res.json())
-    .then(data =>{
-        display(data.list[0])
-    })
-   }
-
-   // display data
-   function display(data){
-    console.log(data)
-    if(data){
-        const cityName = data.name;
-        const temperature = data.main.temp_max;
-        const sky = data.weather[0].description;
-        const icon = data.weather[0].icon;
-        
-        document.getElementById("place-name").innerText = cityName;
-        document.getElementById("temp").innerHTML = `${temperature}&deg;<span>C</span>`;
-        document.getElementById("sky").innerText = sky;
-
-
-
-    }else{
-        alert("sorry! Invalid city name!")
-    }
-
-
-   }
-
-
-
-
-
-
-</script>
+        loadDate();
+        // load dat from api
+        function loadDate(city) {
+            // fetch api data 
+            const url = `http://api.openweathermap.org/data/2.5/find?q=${city?city:'Thakurgaon'}&units=metric&appid=1f8c8bdcea67507dd940eaab002da51a`
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    display(data.list[0])
+                })
+        }
+        // display data
+        function display(data) {
+            if (data) {
+                console.log(data);
+                const cityName = data.name;
+                const temperature = data.main.temp_max;
+                const sky = data.weather[0].description;
+                const icon = data.weather[0].icon;
+                const country = data.sys.country;
+                console.log(country);
+                document.getElementById("place-name").innerText = cityName;
+                document.getElementById("country").innerText = country;
+                document.getElementById("temp").innerHTML = `${temperature}&deg;<span>C</span>`;
+                document.getElementById("sky").innerText = sky;
+            } else {
+                alert("sorry! city name is not correct!")
+            }
+        }
+    </script>
 </body>
+
 </html>

@@ -7,21 +7,20 @@ img{
     max-width:100%;
 }
 body{
+    position:relative;
     font-family: 'Montserrat', sans-serif;
     background-image:linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.2)) ,url("images/weather-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height:auto;
     background-position:center;
+    background-attachment: fixed;
 }
 .app-container {
     max-width: 600px;
     width: 95%;
-    margin: auto;
-    position: absolute;
-    left: 50%;
-    top:40%;
-    transform: translate(-50%, -50%);
+    margin:auto;
+    padding:0 15px;
 }
 h1{
     padding: 0;
@@ -60,14 +59,18 @@ h1{
     box-shadow: 0px 0px 10px rgb(79, 79, 155);
 }
 .input-place button {
-    position: absolute;
+    position: relative;
     cursor: pointer;
-    background:orange;
+    background: orange;
     color: #fff;
-    right: 10%;
+    left: -27px;
     font-weight: 700;
     font-size: 14px;
     border-radius: 0 20px 20px 0;
+}
+.tempareture h3 sub{
+    font-size: 14px;
+    color: blue;
 }
 .display-data{
     text-align: center;
@@ -92,6 +95,16 @@ h1{
     margin: 10px 0;
     font-size: 14px;
 }
+.dev-info{
+    text-align: center;
+    padding: 10px;
+    margin-top: 200px;
+}
+.dev-info span{
+    font-weight: bold;
+    color: white;
+}
+//
 @media screen and (max-width:380px){
     .input-place input {
         width: 100%;
