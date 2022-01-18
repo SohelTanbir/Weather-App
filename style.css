@@ -36,11 +36,12 @@ h1{
 ::placeholder{
     font-weight:600;
     font-size: 14px;
-    color: #dbdbdb;
+    color: #b3b3b3;
     font-style: italic;
 }
 .input-place{
     text-align: center;
+    position: relative;
 }
 .input-place input, button{
     border: none;
@@ -59,14 +60,14 @@ h1{
     box-shadow: 0px 0px 10px rgb(79, 79, 155);
 }
 .input-place button {
-    position: relative;
+    position: absolute;
     cursor: pointer;
     background: orange;
     color: #fff;
-    left: -27px;
     font-weight: 700;
     font-size: 14px;
     border-radius: 0 20px 20px 0;
+    right: 10%;
 }
 .tempareture h3 sub{
     font-size: 14px;
@@ -108,11 +109,15 @@ h1{
     .dev-info {
         margin-top: 120px;
     }
+    .input-place input {
+        width: 100%;
+    }
+    .input-place button {
+        right:0%;
+    }
 }
 @media screen and (max-width:380px){
-    .input-place button {
-        right: 0%;
-    }
+
     .dev-info {
         margin-top: 110px;
     }
