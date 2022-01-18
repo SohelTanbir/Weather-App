@@ -24,7 +24,7 @@
         </div>
         <div class="display-data">
             <div class="tempareture">
-                <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
+                <img id="conditionIcon" src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
                 <h3><span id="place-name"></span><sub id="country">BD</sub></h3>
                 <h1 id="temp">20&deg;<span>C</span></h1>
                 <h4 id="sky">clouds</h4>
@@ -56,22 +56,24 @@
         // display data
         function display(data) {
             if (data) {
-                console.log(data);
                 const cityName = data.name;
                 const temperature = data.main.temp_max;
                 const sky = data.weather[0].description;
                 const icon = data.weather[0].icon;
                 const country = data.sys.country;
-                console.log(country);
+                fetch(`https://openweathermap.org/img/wn/${icon}@2x.png`)
+                .then(res =>{
+                    document.getElementById("conditionIcon").src = res.url
+                })
                 document.getElementById("place-name").innerText = cityName;
                 document.getElementById("country").innerText = country;
                 document.getElementById("temp").innerHTML = `${temperature}&deg;<span>C</span>`;
                 document.getElementById("sky").innerText = sky;
+
             } else {
                 alert("sorry! city name is not correct!")
             }
         }
     </script>
 </body>
-
 </html>
